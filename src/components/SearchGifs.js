@@ -49,7 +49,7 @@ class SearchGifs extends React.Component {
           </div>
 
           <button onClick={this.handleNewGif} type="submit" className="btn btn-primary">Submit</button>
-       </form>
+       </form>  
     );
   }
 }

@@ -11,6 +11,7 @@ class SearchGiphy extends React.Component {
     };
     this.handleKeywordChange = this.handleKeywordChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleDelete = this.handleDelete.bind(this);
   }
 
   handleKeywordChange(e) {
@@ -19,11 +20,19 @@ class SearchGiphy extends React.Component {
 
   handleSubmit(event) {
     event.preventDefault();
-    fetch(`http://api.giphy.com/v1/gifs/search?q=${this.state.keyword}&limit=10&api_key=dc6zaTOxFJmzC` )
+    fetch(`http://api.giphy.com/v1/gifs/search?q=${this.state.keyword}&limit=3&api_key=dc6zaTOxFJmzC` )
       .then(result => result.json())
       .then(data => this.setState({foundImages:this.convertToShowGifs(this.state.keyword, data.data)}));
   }
 
+  handleDelete(img) {
+    let filter = function(filterImage) {
+      return filterImage.name !== img.name;
+    };
+    let filtered = this.state.foundImages.filter(filter);
+    this.setState({foundImages: filtered });
+
+  }
   convertToShowGifs(keyword, foundImages) {
     return foundImages.map(image => ({
       name: image.id,
@@ -45,10 +54,11 @@ class SearchGiphy extends React.Component {
         <button onClick={this.handleSubmit} type="submit" className="btn btn-primary">Submit</button>
 
       </form>
-       <ShowGifs addNewImage={this.props.addNewImage} gifs={this.state.foundImages} noButton={false}/>
+       <ShowGifs addNewImage={this.props.addNewImage} handleDelete={this.handleDelete} gifs={this.state.foundImages} noButton={false}/>
     </div>
     );
   }
+
 }
 SearchGiphy.propTypes = {
   addNewImage: React.PropTypes.func.isRequired

@@ -27,7 +27,7 @@ class SearchGifs extends React.Component {
   }
 
   handleNewGif(event) {
-    event.preventDefault();
+    // event.preventDefault();
     this.props.addNewImage(this.state);
   }
 
@@ -49,7 +49,7 @@ class SearchGifs extends React.Component {
           </div>
 
           <button onClick={this.handleNewGif} type="submit" className="btn btn-primary">Submit</button>
-       </form>  
+       </form>
     );
   }
 }

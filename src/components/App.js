@@ -5,13 +5,16 @@ import SearchGiphy from './SearchGiphy';
 
 class App extends React.Component {
 
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
-      images: []
+      images: [],
+      loggedinuser: ""
     };
     this.addNewImage = this.addNewImage.bind(this);
     this.deleteImage = this.deleteImage.bind(this);
+
+    // console.log(this.props.route.loggedinuser);
   }
 
   componentDidMount(){
@@ -58,12 +61,14 @@ class App extends React.Component {
 
     return (
       <div>
-        <SearchGiphy addNewImage={this.addNewImage}/>
-        <SearchGifs addNewImage={this.addNewImage}/>
-        <ShowGifs addNewImage={this.addNewImage} gifs={this.state.images} noButton deleteImage={this.deleteImage}/>
+        <ShowGifs loggedinuser={this.props.route.loggedinuser} addNewImage={this.addNewImage} gifs={this.state.images} noButton deleteImage={this.deleteImage}/>
       </div>
     );
   }
 }
+
+App.propTypes = {
+  route: React.PropTypes.object
+};
 
 export default App;

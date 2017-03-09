@@ -6,14 +6,14 @@ ShowGifs.propTypes = {
   addNewImage: React.PropTypes.func.isRequired,
   noButton: React.PropTypes.bool,
   handleDelete: React.PropTypes.func,
-  deleteImage: React.PropTypes.func
-
+  deleteImage: React.PropTypes.func,
+  loggedinuser: React.PropTypes.object
 };
 
 export default function ShowGifs(props) {
   let images = props.gifs.map(function(img) {
     return (
-      <SoloImageWithButton key={img.name} img={img} addNewImage={props.addNewImage}
+      <SoloImageWithButton loggedinuser={props.loggedinuser} key={img.name} img={img} addNewImage={props.addNewImage}
       handleDelete={props.handleDelete} deleteImage={props.deleteImage} noButton={props.noButton}/>
     );
   });

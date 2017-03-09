@@ -27,8 +27,8 @@ class SoloImageWithButton extends React.Component{
     return(
       <div key={this.props.img.name}> <br/>
         <img src={this.props.img.url}></img>
-        {this.props.noButton ? '' : ourButton}
-        {!this.props.noButton ? '' : deleteButton}
+        {(this.props.noButton && !this.props.loggedinuser.isloggedin) ? '' : ourButton}
+        {(!this.props.noButton && this.props.loggedinuser.isadmin) ? '' : deleteButton}
         <h3>{this.props.img.description}</h3>
       </div>
     );
@@ -40,7 +40,8 @@ SoloImageWithButton.propTypes = {
   addNewImage: React.PropTypes.func,
   noButton: React.PropTypes.bool,
   handleDelete: React.PropTypes.func,
-  deleteImage: React.PropTypes.func
+  deleteImage: React.PropTypes.func,
+  loggedinuser: React.PropTypes.object
 };
 
 export default SoloImageWithButton;

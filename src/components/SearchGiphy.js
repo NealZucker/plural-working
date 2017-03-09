@@ -41,6 +41,27 @@ class SearchGiphy extends React.Component {
     }));
   }
 
+  addNewImage(img) {
+    fetch('/api/gifRoutes', {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        name: img.name,
+        url: img.url,
+        description: img.description
+      })
+    })
+    .then(result => result.json());
+    // .then(imgag => {
+    //   let allImages=this.state.images.slice();
+    //   allImages.push(imgag);
+    //   this.setState({images: allImages});
+    // });
+  }
+
   render() {
     return (
     <div>
@@ -54,13 +75,15 @@ class SearchGiphy extends React.Component {
         <button onClick={this.handleSubmit} type="submit" className="btn btn-primary">Submit</button>
 
       </form>
-       <ShowGifs addNewImage={this.props.addNewImage} handleDelete={this.handleDelete} gifs={this.state.foundImages} noButton={false}/>
+       <ShowGifs loggedinuser={this.props.route.loggedinuser} addNewImage={this.addNewImage} handleDelete={this.handleDelete} gifs={this.state.foundImages} noButton={false}/>
     </div>
     );
   }
 
 }
 SearchGiphy.propTypes = {
-  addNewImage: React.PropTypes.func.isRequired
+  loggedinuser: React.PropTypes.object,
+  route: React.PropTypes.object
+  // addNewImage: React.PropTypes.func.isRequired
 };
 export default SearchGiphy;

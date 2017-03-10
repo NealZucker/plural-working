@@ -7,7 +7,6 @@ export default class ImageStore {
     });
     this.addNewImage = this.addNewImage.bind(this);
     this.deleteImage = this.deleteImage.bind(this);
-
   }
 
   addNewImage(img) {

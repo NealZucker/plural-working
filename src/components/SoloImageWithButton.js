@@ -28,7 +28,7 @@ class SoloImageWithButton extends React.Component{
       <div key={this.props.img.name}> <br/>
         <img src={this.props.img.url}></img>
         {(this.props.noButton && !this.props.loggedinuser.isloggedin) ? '' : ourButton}
-        {(!this.props.noButton && this.props.loggedinuser.isadmin) ? '' : deleteButton}
+        {(!this.props.noButton && !this.props.loggedinuser.isadmin) ? '' : deleteButton}
         <h3>{this.props.img.description}</h3>
       </div>
     );

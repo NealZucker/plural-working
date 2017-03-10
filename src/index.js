@@ -10,14 +10,16 @@ import ShowGifs from './components/ShowGifs';
 import HomeGif from './components/HomeGif';
 import SignUp from './components/SignUp';
 import ImageStore from './stores/ImageStore';
+import UserStore from './stores/UserStore';
 import { Provider } from 'mobx-react';
 
-let loggedinuser = {username: 'Ricky', isadmin: true, isloggedin: false};
+let loggedinuser = {username: 'Ricky', isadmin: false, isloggedin: false};
 
 const imageStore = new ImageStore();
+const userStore = new UserStore();
 
 ReactDOM.render(
-      <Provider imageStore={imageStore}>
+      <Provider userStore={userStore} imageStore={imageStore}>
         <Router history={browserHistory}>
           <Route path="/" loggedinuser={loggedinuser} component={Navigation}>
             <IndexRoute component={HomeGif}/>

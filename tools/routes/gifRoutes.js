@@ -18,7 +18,6 @@ router.route('/gifRoutes')
     gif.name = req.body.name;
     gif.description = req.body.description;
     gif.url = req.body.url;
-    console.log(gif);
     gif.save(function(err, gif){
       if (err) {
         next(err);

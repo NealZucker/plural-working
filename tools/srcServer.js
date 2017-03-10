@@ -54,7 +54,6 @@ app.post('/newUser', function(req, res) {
     name: req.body.name,
     password: hash.generate(req.body.password),
     admin: false
-
   });
 
 
@@ -68,7 +67,6 @@ app.post('/newUser', function(req, res) {
 });
 
 app.post('/authenticate', function(req, res) {
-
   // find the user
   User.findOne({
     name: req.body.name
@@ -93,12 +91,13 @@ app.post('/authenticate', function(req, res) {
         });
 
         // return the information including token as JSON
-        // res.json({
-        //   success: true,
-        //   message: 'Enjoy your token!',
-        //   token: token
-        // });
-        res.redirect('/');
+        res.json({
+          success: true,
+          message: 'Enjoy your token!',
+          token: token
+        });
+        console.log("successful auth");
+        // res.redirect('/');
 
       }
 

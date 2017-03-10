@@ -1,5 +1,4 @@
 import React from 'react';
-import Helper from './HelperFunction';
 import { observer, inject } from 'mobx-react';
 
 class SearchGifs extends React.Component {

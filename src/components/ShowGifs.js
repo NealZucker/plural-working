@@ -13,7 +13,8 @@ ShowGifs.propTypes = {
 export default function ShowGifs(props) {
   let images = props.gifs.map(function(img) {
     return (
-      <SoloImageWithButton loggedinuser={props.loggedinuser} key={img.name} img={img} addNewImage={props.addNewImage}
+      <SoloImageWithButton loggedinuser={props.loggedinuser} key={img.name} img={img}
+      addNewImage={props.addNewImage}
       handleDelete={props.handleDelete} deleteImage={props.deleteImage} noButton={props.noButton}/>
     );
   });

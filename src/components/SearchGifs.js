@@ -1,5 +1,6 @@
 import React from 'react';
 import Helper from './HelperFunction';
+import { observer, inject } from 'mobx-react';
 
 class SearchGifs extends React.Component {
 
@@ -30,28 +31,7 @@ class SearchGifs extends React.Component {
   handleNewGif(event) {
     event.preventDefault();
     // let ourHelper = new Helper();
-    Helper.addNewImage(this.state);
-  }
-
-  addNewImage(img) {
-    fetch('/api/gifRoutes', {
-      method: 'POST',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        name: img.name,
-        url: img.url,
-        description: img.description
-      })
-    })
-    .then(result => result.json())
-    .then(imgag => {
-      let allImages=this.state.images.slice();
-      allImages.push(imgag);
-      this.setState({images: allImages});
-    });
+    this.props.imageStore.addNewImage(this.state);
   }
 
   render() {
@@ -78,7 +58,8 @@ class SearchGifs extends React.Component {
 }
 
 SearchGifs.propTypes = {
-  addNewImage: React.PropTypes.func
+  addNewImage: React.PropTypes.func,
+  imageStore: React.PropTypes.object
 };
 
-export default SearchGifs;
+export default inject("imageStore")(observer(SearchGifs));

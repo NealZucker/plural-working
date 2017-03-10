@@ -41,7 +41,8 @@ SoloImageWithButton.propTypes = {
   noButton: React.PropTypes.bool,
   handleDelete: React.PropTypes.func,
   deleteImage: React.PropTypes.func,
-  loggedinuser: React.PropTypes.object
+  loggedinuser: React.PropTypes.object,
+  imageStore: React.PropTypes.object
 };
 
 export default SoloImageWithButton;

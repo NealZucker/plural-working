@@ -1,5 +1,6 @@
 import React from 'react';
 import ShowGifs from './ShowGifs';
+import { observer, inject } from 'mobx-react';
 
 
 class SearchGiphy extends React.Component {
@@ -41,26 +42,6 @@ class SearchGiphy extends React.Component {
     }));
   }
 
-  addNewImage(img) {
-    fetch('/api/gifRoutes', {
-      method: 'POST',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        name: img.name,
-        url: img.url,
-        description: img.description
-      })
-    })
-    .then(result => result.json());
-    // .then(imgag => {
-    //   let allImages=this.state.images.slice();
-    //   allImages.push(imgag);
-    //   this.setState({images: allImages});
-    // });
-  }
 
   render() {
     return (
@@ -69,13 +50,16 @@ class SearchGiphy extends React.Component {
         <legend>Search Giphy for Images</legend>
 
         <div className="form-group">
-          <input onChange={this.handleKeywordChange} value={this.state.Keyword} type="text" className="form-control" id="keyword" placeholder="keyword"/>
+          <input onChange={this.handleKeywordChange} value={this.state.Keyword}
+          type="text" className="form-control" id="keyword" placeholder="keyword"/>
         </div>
 
         <button onClick={this.handleSubmit} type="submit" className="btn btn-primary">Submit</button>
 
       </form>
-       <ShowGifs loggedinuser={this.props.route.loggedinuser} addNewImage={this.addNewImage} handleDelete={this.handleDelete} gifs={this.state.foundImages} noButton={false}/>
+       <ShowGifs loggedinuser={this.props.route.loggedinuser}
+       addNewImage={this.props.imageStore.addNewImage}
+       handleDelete={this.props.imageStore.deleteImage} gifs={this.state.foundImages} noButton={false}/>
     </div>
     );
   }
@@ -83,7 +67,8 @@ class SearchGiphy extends React.Component {
 }
 SearchGiphy.propTypes = {
   loggedinuser: React.PropTypes.object,
-  route: React.PropTypes.object
+  route: React.PropTypes.object,
+  imageStore: React.PropTypes.object
   // addNewImage: React.PropTypes.func.isRequired
 };
-export default SearchGiphy;
+export default inject("imageStore")(observer(SearchGiphy));

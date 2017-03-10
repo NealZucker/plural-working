@@ -40,11 +40,11 @@ app.use(require('webpack-dev-middleware')(compiler, {
 }));
 
 app.use(require('webpack-hot-middleware')(compiler));
-
+app.use(express.static('./src/Public'));
 app.use('/api', gifRoutes);
 
 app.get('/', function(req, res) {
-  res.sendFile(path.join( __dirname, '../src/index.html'));
+  res.sendFile(path.join( __dirname, '../src/Public/index.html'));
 });
 
 app.post('/newUser', function(req, res) {
@@ -61,8 +61,9 @@ app.post('/newUser', function(req, res) {
   newUser.save(function(err) {
     if (err) throw err;
 
-    console.log('User saved successfully');
-    res.json({ success: true });
+    res.redirect('/');
+    // console.log('User saved successfully');
+    // res.json({ success: true });
   });
 });
 
